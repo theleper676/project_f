@@ -23,6 +23,8 @@ class Game extends AppChildProcess {
 	var curGameSpeed = 1.0;
 	var slowMos : Map<SlowMoId, { id:SlowMoId, t:Float, f:Float }> = new Map();
 
+	/* World Entities */
+	var hero: Hero;
 
 	public function new() {
 		super();
@@ -41,7 +43,7 @@ class Game extends AppChildProcess {
 		hud = new ui.Hud();
 		camera = new Camera();
 
-		startLevel(Assets.worldData.all_worlds.SampleWorld.all_levels.FirstLevel);
+		startLevel(Assets.worldData.all_worlds.Default.all_levels.Test);
 	}
 
 
@@ -66,7 +68,10 @@ class Game extends AppChildProcess {
 
 		level = new Level(l);
 		// <---- Here: instanciate your level entities
+		hero = new Hero();
 
+		for(e in level.data.l_Entities.all_Enemy)
+			new Enemy(e);
 		camera.centerOnTarget();
 		hud.onLevelStart();
 		dn.Process.resizeAll();
@@ -87,7 +92,7 @@ class Game extends AppChildProcess {
 	function onLdtkReload() {
 		hud.notify("LDtk reloaded");
 		if( level!=null )
-			startLevel( Assets.worldData.all_worlds.SampleWorld.getLevel(level.data.uid) );
+			startLevel( Assets.worldData.all_worlds.Default.getLevel(level.data.uid) );
 	}
 
 	/** Window/app resize event **/

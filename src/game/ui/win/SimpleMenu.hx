@@ -1,5 +1,7 @@
 package ui.win;
 
+import ui.component.DebugSlider;
+
 class SimpleMenu extends ui.Window {
 	public var uiCtrl : UiGroupController;
 
@@ -31,6 +33,8 @@ class SimpleMenu extends ui.Window {
 		}
 	}
 
+
+
 	public function addButton(label:String, ?tile:h2d.Tile, autoClose=true, cb:Void->Void) {
 		var bt = new ui.component.Button(label, tile, content);
 		bt.minWidth = content.colWidth;
@@ -42,6 +46,10 @@ class SimpleMenu extends ui.Window {
 		uiCtrl.registerComponent(bt);
 	}
 
+	public function addDebugSlider (label:String, getter:Void->Int, setter:Int ->Void){
+		var slider = new DebugSlider(label, getter, setter,content);
+		uiCtrl.registerComponent(slider);
+	}
 	public function addCheckBox(label:String, getter:Void->Bool, setter:Bool->Void, autoClose=false) {
 		var bt = new ui.component.CheckBox(label,getter,setter,content);
 		bt.minWidth = content.colWidth;

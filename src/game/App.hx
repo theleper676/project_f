@@ -2,6 +2,9 @@
 	"App" class takes care of all the top-level stuff in the whole application. Any other Process, including Game instance, should be a child of App.
 **/
 
+import ui.win.SimpleMenu;
+import ui.win.DebugWindow;
+
 class App extends dn.Process {
 	public static var ME : App;
 
@@ -116,8 +119,8 @@ class App extends dn.Process {
 	}
 
 	final function _createGameInstance() {
-		// new Game(); // <---- Uncomment this to start an empty Game instance
-		new sample.SampleGame(); // <---- Uncomment this to start the Sample Game instance
+		 new Game(); // <---- Uncomment this to start an empty Game instance
+		//new sample.SampleGame(); // <---- Uncomment this to start the Sample Game instance
 	}
 
 
@@ -232,6 +235,7 @@ class App extends dn.Process {
 		// Gamepad bindings
 		controller.bindPadLStick4(MoveLeft, MoveRight, MoveUp, MoveDown);
 		controller.bindPad(Jump, A);
+		controller.bindPad(Melee, B);
 		controller.bindPad(Restart, SELECT);
 		controller.bindPad(Pause, START);
 		controller.bindPad(MoveLeft, DPAD_LEFT);
@@ -252,6 +256,8 @@ class App extends dn.Process {
 		controller.bindKeyboard(MoveUp, [K.UP, K.Z, K.W]);
 		controller.bindKeyboard(MoveDown, [K.DOWN, K.S]);
 		controller.bindKeyboard(Jump, [K.SPACE,K.UP]);
+		controller.bindKeyboard(Melee, [K.CTRL]);
+		controller.bindKeyboard(Dash, [K.SHIFT]);
 		controller.bindKeyboard(Restart, K.R);
 		controller.bindKeyboard(ScreenshotMode, K.F9);
 		controller.bindKeyboard(Pause, K.P);
@@ -324,7 +330,6 @@ class App extends dn.Process {
 
 		if( ui.Console.ME.isActive() )
 			cd.setF("consoleRecentlyActive",2);
-
 
 		// Mem track reporting
 		#if debug
