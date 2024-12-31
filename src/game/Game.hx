@@ -67,11 +67,11 @@ class Game extends AppChildProcess {
 		garbageCollectEntities();
 
 		level = new Level(l);
-		// <---- Here: instanciate your level entities
+		
 		hero = new Hero();
+		for (d in level.data.l_Entities.all_Destructible) new en.Destructible(d);
+		for(e in level.data.l_Entities.all_Enemy) new Enemy(e);
 
-		for(e in level.data.l_Entities.all_Enemy)
-			new Enemy(e);
 		camera.centerOnTarget();
 		hud.onLevelStart();
 		dn.Process.resizeAll();

@@ -54,3 +54,8 @@ enum abstract SlowMoId(Int) to Int {
 enum abstract ChargedActionId(Int) to Int {
 	var CA_Unknown;
 }
+
+enum ItemType {
+	Soul;
+	Coin;
+}

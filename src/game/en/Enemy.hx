@@ -11,6 +11,7 @@ class Enemy extends Entity {
         var graphics = new h2d.Graphics(spr);
         graphics.beginFill(0xcc3806);
 		graphics.drawRect(-innerRadius, -hei, innerRadius*2, hei);
+        graphics.endFill();
     }
 
 

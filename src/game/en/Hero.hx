@@ -9,7 +9,7 @@ class Hero extends Entity {
     var walkValue:Float = 0;
     static var gravity = 0.05;
     static var jumpForce = 0.45;
-    static var speed = 0.025;
+    static var speed = 0.10;
     static var frictionX = 0.105;
     static var frictionY = 0.94; // There is gotta be a better way to write this
 
@@ -51,9 +51,9 @@ class Hero extends Entity {
     }
 
     function onMelee() {
-        for (e in en.Enemy.ALL) 
+        for (e in en.Destructible.ALL)
             if(isInRange(e, 1))
-                e.hit(10, this);
+                e.onpunch(this);
     }
 
     override function dispose() {
